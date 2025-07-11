@@ -1,22 +1,87 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import "../styles/global.css";
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuroLynx</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+  </head>
+
+  <body class="font-sans bg-neurolynx-navy text-neurolynx-gray">
+
+    <!-- HEADER -->
+    <header class="bg-neurolynx-navy px-4 py-3 fixed top-0 w-full z-50 shadow-md">
+      <nav class="flex justify-between items-center max-w-7xl mx-auto">
+        <!-- LOGO -->
+        <a href="/" class="flex items-center gap-3">
+          <img src="/logo.png" alt="Neurolynx Logo" class="h-16 w-auto" />
+          <span class="text-2xl font-bold text-neurolynx-cyan">NeuroLynx</span>
+        </a>
+
+        <!-- BOTÓN MENÚ -->
+        <button id="menu-toggle" class="flex items-center gap-2 text-neurolynx-cyan font-semibold hover:text-neurolynx-blue transition text-sm">
+          <span>Menú</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- MENÚ DESPLEGABLE -->
+      <div id="mobile-menu" class="fixed top-0 right-0 h-full w-2/3 max-w-xs bg-[#0B132B] shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50 pt-20 px-6">
+        <button id="close-menu" class="absolute top-4 right-4 text-neurolynx-cyan text-2xl">✕</button>
+        <a href="/" class="block py-3 border-b border-neurolynx-blue hover:text-neurolynx-blue">Inicio</a>
+        <a href="/quienes-somos" class="block py-3 border-b border-neurolynx-blue hover:text-neurolynx-blue">Quiénes somos</a>
+        <a href="/planes" class="block py-3 border-b border-neurolynx-blue hover:text-neurolynx-blue">Planes</a>
+        <a href="/contacto" class="block py-3 border-b border-neurolynx-blue hover:text-neurolynx-blue">Contacto</a>
+        <a href="/preguntas" class="block py-3 hover:text-neurolynx-blue">Preguntas</a>
+      </div>
+
+      <!-- FONDO OSCURO DETRÁS DEL MENÚ -->
+      <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+      <!-- SCRIPT PARA MENÚ -->
+      <script is:inline>
+        const toggle = document.getElementById("menu-toggle");
+        const closeBtn = document.getElementById("close-menu");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("overlay");
+
+        toggle?.addEventListener("click", () => {
+          menu.classList.remove("translate-x-full");
+          overlay.classList.remove("hidden");
+        });
+
+        closeBtn?.addEventListener("click", () => {
+          menu.classList.add("translate-x-full");
+          overlay.classList.add("hidden");
+        });
+
+        overlay?.addEventListener("click", () => {
+          menu.classList.add("translate-x-full");
+          overlay.classList.add("hidden");
+        });
+      </script>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="pt-28 px-4 max-w-7xl mx-auto">
+      <slot />
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-sm text-neurolynx-gray">
+      © 2025 Neurolynx. Todos los derechos reservados.
+    </footer>
+
+    <!-- BOTÓN WHATSAPP -->
+    <a href="https://wa.me/573123748610" target="_blank" 
+       class="fixed bottom-5 right-5 bg-black hover:bg-neurolynx-blue text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 z-50 flex items-center justify-center">
+      <img src="/icons/whatsapp.jpg" alt="WhatsApp" class="w-8 h-8" />
+    </a>
+  </body>
+</html>

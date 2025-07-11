@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<script is:inline>
+  function toggleSwitch() {
+    const isAnual = document.getElementById("toggle-checkbox").checked;
+    const tipo = isAnual ? "anual" : "mensual";
+
+    // Mostrar/ocultar los precios
+    document.querySelectorAll('[data-plan]').forEach((el) => el.classList.add('hidden'));
+    document.querySelectorAll(`[data-plan="${tipo}"]`).forEach((el) => el.classList.remove('hidden'));
+
+    // Mostrar u ocultar insignias de descuento
+    document.querySelectorAll('.discount-badge').forEach((badge) => {
+      badge.classList.toggle('hidden', !isAnual);
+    });
+
+    // Mostrar ventana emergente si se selecciona "Anual"
+    if (isAnual) {
+      const toast = document.getElementById("ahorro-toast");
+      toast.classList.remove("hidden");
+      toast.classList.add("opacity-100");
+
+      setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0");
+      }, 4000);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    toggleSwitch();
+  });
+</script>
+
+<Layout>
+  <section class="py-20 px-4 bg-[#071222] animate-fade-in">
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-neurolynx-cyan mb-8">Nuestros Planes</h2>
+
+    <!-- SWITCH -->
+    <div class="flex justify-center items-center gap-4 mb-12">
+      <span class="text-neurolynx-gray font-medium">Mensual</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="toggle-checkbox" class="sr-only peer" onchange="toggleSwitch()" />
+        <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-neurolynx-cyan rounded-full peer peer-checked:bg-neurolynx-cyan transition-all"></div>
+        <div class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform peer-checked:translate-x-7"></div>
+      </label>
+      <span class="text-neurolynx-gray font-medium">Anual</span>
+    </div>
+
+    <!-- PLANES -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+      <!-- Plan Básico -->
+      <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+        <!-- INSIGNIA -->
+        <span class="discount-badge hidden absolute top-4 right-4 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">🔖 10% OFF</span>
+
+        <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Básico</h3>
+        <p class="text-neurolynx-gray mb-4 text-sm">Ideal para emprendedores y negocios pequeños.</p>
+        <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
+          <li>Chatbot IA con respuestas naturales</li>
+          <li>Registro de conversaciones en base de datos integrada</li>
+          <li>Integración API WhatsApp y ChatGPT</li>
+        </ul>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm" data-plan="mensual">💰 $200.000 único / $110.000 mensual</p>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm hidden" data-plan="anual">💰 $200.000 único / $1.188.000 anual</p>
+      </div>
+
+      <!-- Plan Pro -->
+      <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+        <span class="discount-badge hidden absolute top-4 right-4 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">🔖 10% OFF</span>
+
+        <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Pro</h3>
+        <p class="text-neurolynx-gray mb-4 text-sm">Perfecto para negocios que quieren ir más allá.</p>
+        <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
+          <li>Todo lo del plan Básico</li>
+          <li>Procesamiento y transcripción de voz</li>
+          <li>Conexión a bases de datos externas</li>
+        </ul>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm" data-plan="mensual">💰 $200.000 único / $180.000 mensual</p>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm hidden" data-plan="anual">💰 $200.000 único / $1.944.000 anual</p>
+      </div>
+
+      <!-- Plan Enterprise -->
+      <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+        <span class="discount-badge hidden absolute top-4 right-4 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">🔖 10% OFF</span>
+
+        <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Enterprise</h3>
+        <p class="text-neurolynx-gray mb-4 text-sm">La solución más completa y escalable.</p>
+        <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
+          <li>Todo lo del plan Pro</li>
+          <li>Reconocimiento y análisis de imágenes</li>
+          <li>Conexión con calendarios y agendas inteligentes</li>
+        </ul>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm" data-plan="mensual">💰 $200.000 único / $230.000 mensual</p>
+        <p class="mt-6 text-neurolynx-cyan font-semibold text-sm hidden" data-plan="anual">💰 $200.000 único / $2.484.000 anual</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOAST DE AHORRO -->
+  <div id="ahorro-toast" class="fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-full shadow-lg z-50 opacity-0 transition-opacity duration-500 hidden">
+    🎉 ¡Al pagar anual, ahorras un 10%!
+  </div>
+</Layout>
