@@ -15,8 +15,16 @@ import Layout from "../layouts/Layout.astro";
     </div>
 
     <div class="max-w-3xl mx-auto bg-[#0B132B] p-8 rounded-xl shadow-lg border border-neurolynx-cyan/20">
-      <form name="demo" method="POST" data-netlify="true" action="/gracias" class="space-y-6">
-          <input type="hidden" name="form-name" value="demo" />
+      <form 
+        action="https://formsubmit.co/devs@neurolynx.tech" 
+        method="POST" 
+        class="space-y-6"
+      >
+        <!-- Configuración extra de formsubmit -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://neurolynx.tech/gracias">
+        <input type="hidden" name="_template" value="table">
+
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label class="block text-neurolynx-gray mb-1">Nombre completo</label>

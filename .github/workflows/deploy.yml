@@ -1,0 +1,36 @@
+name: Deploy to SiteGround via FTP
+
+on:
+  push:
+    branches:
+      - main  # o cambia a "master" si usas esa rama
+
+jobs:
+  deploy:
+    name: Upload to SiteGround
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          local-dir: ./dist
+          server-dir: ${{ secrets.SFTP_REMOTE_PATH }}

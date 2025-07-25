@@ -32,36 +32,37 @@ import Layout from '../layouts/Layout.astro';
 </script>
 
 <Layout>
+  <!-- Sección principal -->
   <section class="py-20 px-4 bg-[#071222] animate-fade-in">
-    <h2 class="text-4xl md:text-5xl font-bold text-center text-neurolynx-cyan mb-8">Nuestros Planes</h2>
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-neurolynx-cyan mb-4">Nuestros Planes</h2>
+    <p class="text-center text-neurolynx-gray max-w-2xl mx-auto mb-10 text-lg">
+      Selecciona la cantidad de conversaciones y el modelo de IA para ver el plan que más se ajusta a ti.
+    </p>
 
-    <!-- INFO -->
-    <div class="text-neurolynx-gray text-center max-w-3xl mx-auto mb-10">
-      <p class="mb-4">El precio mensual puede variar dependiendo de las características deseadas por el cliente y el flujo mensual de conversaciones.</p>
-      <div class="grid md:grid-cols-2 gap-4 justify-center">
-        <div>
-          <label for="sesiones" class="block mb-1 font-semibold">Cantidad de chats por mes:</label>
-          <select id="sesiones" name="sesiones" class="w-full px-4 py-2 rounded-md bg-[#0B132B] border border-neurolynx-cyan/30 text-white">
-            <option value="250">250 (Default)</option>
-            <option value="500">500</option>
-            <option value="1000">1000</option>
-            <option value="2000">2000</option>
-            <option value="4000">4000</option>
-          </select>
-        </div>
-        <div>
-          <label for="modelo" class="block mb-1 font-semibold">Modelo de IA:</label>
-          <select id="modelo" name="modelo" class="w-full px-4 py-2 rounded-md bg-[#0B132B] border border-neurolynx-cyan/30 text-white">
-            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Default)</option>
-            <option value="gpt-4o">GPT-4o</option>
-            <option value="gpt-4">GPT-4</option>
-          </select>
-        </div>
+    <!-- Filtros -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+      <div>
+        <label for="sesiones" class="block mb-2 text-sm font-medium text-neurolynx-gray">Cantidad de chats por mes:</label>
+        <select id="sesiones" name="sesiones" class="w-full px-4 py-2 rounded-md bg-[#0B132B] border border-neurolynx-cyan/30 text-white">
+          <option value="250">250 (Recomendado)</option>
+          <option value="500">500</option>
+          <option value="1000">1000</option>
+          <option value="2000">2000</option>
+          <option value="4000">4000</option>
+        </select>
+      </div>
+      <div>
+        <label for="modelo" class="block mb-2 text-sm font-medium text-neurolynx-gray">Modelo de IA:</label>
+        <select id="modelo" name="modelo" class="w-full px-4 py-2 rounded-md bg-[#0B132B] border border-neurolynx-cyan/30 text-white">
+          <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Recomendado)</option>
+          <option value="gpt-4o">GPT-4o</option>
+          <option value="gpt-4">GPT-4</option>
+        </select>
       </div>
     </div>
 
-    <!-- SWITCH -->
-    <div class="flex justify-center items-center gap-4 mb-12">
+    <!-- Switch mensual/anual -->
+    <div class="flex justify-center items-center gap-4 mb-14">
       <span class="text-neurolynx-gray font-medium">Mensual</span>
       <label class="relative inline-flex items-center cursor-pointer">
         <input type="checkbox" id="toggle-checkbox" class="sr-only peer" onchange="toggleSwitch()" />
@@ -71,13 +72,12 @@ import Layout from '../layouts/Layout.astro';
       <span class="text-neurolynx-gray font-medium">Anual</span>
     </div>
 
-    <!-- PLANES -->
+    <!-- Planes -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
-      <!-- Plan Básico -->
+      <!-- Básico -->
       <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
         <span class="discount-badge hidden absolute top-4 right-4 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">🔖 10% OFF</span>
-
         <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Básico</h3>
         <p class="text-neurolynx-gray mb-4 text-sm">Ideal para emprendedores y negocios pequeños.</p>
         <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
@@ -90,10 +90,9 @@ import Layout from '../layouts/Layout.astro';
         <p class="mt-6 text-neurolynx-cyan font-semibold text-sm hidden" data-plan="anual">💰 $200.000 único / $1.188.000 anual</p>
       </div>
 
-      <!-- Plan Pro -->
+      <!-- Pro -->
       <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg opacity-60 pointer-events-none">
         <span class="absolute top-4 right-4 bg-yellow-600 text-white text-xs px-2 py-1 rounded-full shadow">🚧 Próximamente</span>
-
         <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Pro</h3>
         <p class="text-neurolynx-gray mb-4 text-sm">Perfecto para negocios que quieren ir más allá.</p>
         <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
@@ -105,10 +104,9 @@ import Layout from '../layouts/Layout.astro';
         <p class="mt-6 text-neurolynx-cyan font-semibold text-sm hidden" data-plan="anual">💰 $200.000 único / $1.944.000 anual</p>
       </div>
 
-      <!-- Plan Enterprise -->
+      <!-- Enterprise -->
       <div class="relative bg-[#0B132B] border border-neurolynx-cyan/30 p-6 rounded-2xl shadow-lg opacity-60 pointer-events-none">
         <span class="absolute top-4 right-4 bg-yellow-600 text-white text-xs px-2 py-1 rounded-full shadow">🚧 Próximamente</span>
-
         <h3 class="text-2xl font-bold text-neurolynx-cyan mb-2">Enterprise</h3>
         <p class="text-neurolynx-gray mb-4 text-sm">La solución más completa y escalable.</p>
         <ul class="text-neurolynx-gray text-sm list-disc list-inside space-y-2">
@@ -121,20 +119,25 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
     </div>
+
+    <!-- Aclaración -->
+    <div class="text-neurolynx-gray text-sm text-center mt-12 max-w-3xl mx-auto">
+      <p>El precio mensual puede variar dependiendo de las características deseadas por el cliente y el flujo mensual de conversaciones.</p>
+    </div>
   </section>
-  <!-- CTA de contacto -->
-<section class="mt-20 bg-[#0B132B] py-12 px-6 rounded-2xl shadow-inner animate-fade-in max-w-4xl mx-auto text-center border border-neurolynx-cyan/20">
-  <h3 class="text-2xl md:text-3xl font-bold text-neurolynx-cyan mb-4">¿Quieres implementar esto en tu negocio?</h3>
-  <p class="text-neurolynx-gray mb-6 text-lg">
-    Si tienes dudas o deseas adaptar un plan según el flujo de clientes y el modelo de IA más adecuado, estamos listos para ayudarte.
-  </p>
-  <a href="/contacto" class="inline-block bg-neurolynx-cyan text-[#071222] font-semibold px-8 py-3 rounded-full hover:bg-neurolynx-blue transition">
-    Contáctanos
-  </a>
-</section>
 
+  <!-- CTA -->
+  <section class="mt-20 bg-[#0B132B] py-12 px-6 rounded-2xl shadow-inner animate-fade-in max-w-4xl mx-auto text-center border border-neurolynx-cyan/20">
+    <h3 class="text-2xl md:text-3xl font-bold text-neurolynx-cyan mb-4">¿Quieres implementar esto en tu negocio?</h3>
+    <p class="text-neurolynx-gray mb-6 text-lg">
+      Si tienes dudas o deseas adaptar un plan según el flujo de clientes y el modelo de IA más adecuado, estamos listos para ayudarte.
+    </p>
+    <a href="/contacto" class="inline-block bg-neurolynx-cyan text-[#071222] font-semibold px-8 py-3 rounded-full hover:bg-neurolynx-blue transition">
+      Contáctanos
+    </a>
+  </section>
 
-  <!-- TOAST DE AHORRO -->
+  <!-- TOAST -->
   <div id="ahorro-toast" class="fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-full shadow-lg z-50 opacity-0 transition-opacity duration-500 hidden">
     🎉 ¡Al pagar anual, ahorras un 10%!
   </div>
