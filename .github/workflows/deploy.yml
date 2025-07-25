@@ -3,7 +3,7 @@ name: Deploy to SiteGround via FTP
 on:
   push:
     branches:
-      - main
+      - main  # cambia "main" si tu rama principal tiene otro nombre
 
 jobs:
   ftp-deploy:
@@ -13,7 +13,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build project
-        run: npm install && npm run build
+        run: |
+          npm install
+          npm run build
 
       - name: Deploy to SiteGround via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
