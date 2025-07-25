@@ -3,19 +3,18 @@ name: Deploy to SiteGround via FTP
 on:
   push:
     branches:
-      - main  # cambia "main" si tu rama principal tiene otro nombre
+      - main
 
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Build project
-        run: |
-          npm install
-          npm run build
+        run: npm install && npm run build
 
       - name: Deploy to SiteGround via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -24,5 +23,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/
-          server-dir: /server-dir: /public_html/
-
+          server-dir: /public_html/
